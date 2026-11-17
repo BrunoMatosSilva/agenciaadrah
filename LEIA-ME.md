@@ -19,19 +19,35 @@ Os caminhos dos arquivos foram ajustados para serem relativos. Assim, os mesmos 
 | --- | --- |
 | `index.html` | Textos, estrutura da página, serviços, perguntas frequentes e formulário. |
 | `style.css` | Cores, tipografia, espaçamentos e adaptações para desktop e celular. |
-| `app.js` | Menu móvel, seleção dos serviços e envio AJAX do formulário de contato. |
+| `app.js` | Menu móvel, seleção dos serviços e preparação da mensagem de contato. |
 | `assets/adrah-logo.png` | Logo usado na página. |
 | `assets/favicon.svg` | Ícone exibido na aba do navegador. |
 | `assets/manrope-*.ttf` | Fontes locais usadas no site. |
 | `assets/LICENCA-Manrope.txt` | Licença de distribuição da fonte. |
 
-## Contato e formulário
+## Contato e formulário por e-mail
 
-O WhatsApp configurado é **(11) 96136-4949**.
+O formulário está configurado para encaminhar as mensagens a **agenciaadrah@gmail.com**, por meio do serviço **FormSubmit** (https://formsubmit.co/). O cliente informa nome, e-mail, serviço de interesse e sua ideia. O endereço do cliente é utilizado como Reply-To, permitindo responder diretamente a ele na caixa da agência.
 
-O formulário envia nome, interesse e ideia para **agenciaadrah@gmail.com** usando o endpoint AJAX do FormSubmit, sem React e sem sair da página. O resultado do envio é informado no próprio formulário. No primeiro uso, o destinatário precisa confirmar o endereço no e-mail de ativação enviado pelo FormSubmit; até essa confirmação, os envios não serão encaminhados. O provedor processa os dados para realizar o envio. O link direto para conversar pelo WhatsApp continua disponível separadamente.
+A opção de falar diretamente pelo WhatsApp **(11) 96136-4949** continua disponível. O botão principal do formulário agora envia a mensagem por e-mail, sem abrir o WhatsApp ou o programa de e-mail do visitante.
 
-Para trocar o número de contato, atualize as ocorrências de `5511961364949` em `index.html` e `app.js`, além do número formatado exibido no HTML.
+### Ativação inicial — faça antes de divulgar o formulário
+
+1. Envie os arquivos a uma hospedagem e abra o formulário pelo endereço HTTPS do site.
+2. Preencha o formulário com uma mensagem de teste e envie.
+3. Abra a conta **agenciaadrah@gmail.com** e procure a mensagem do **FormSubmit**, inclusive na pasta de spam.
+4. Clique no link de ativação/"Activate Form" que o serviço enviar para confirmar o recebimento.
+5. Faça um novo envio e confirme a chegada da mensagem na caixa da ADRAH, incluindo o e-mail do remetente e o serviço escolhido. Teste também a opção Responder no e-mail recebido.
+
+A ativação só pode ser concluída por quem tem acesso à caixa de destino. Se já estiver ativado, basta validar um novo envio. Se o e-mail de ativação não aparecer, consulte https://formsubmit.co/help e o suporte do serviço.
+
+**A ativação e a entrega real ainda não foram confirmadas.** O teste feito neste ambiente não confirmou o envio ao destinatário. O código trata falhas sem mostrar uma mensagem falsa de sucesso e mantém os dados preenchidos para nova tentativa.
+
+O formulário precisa ser aberto por uma hospedagem ou servidor local com acesso à internet; o envio não funciona abrindo o HTML diretamente como arquivo. A validação de funcionamento final deve ser feita no endereço onde ele será utilizado.
+
+Não é necessário inserir senha do Gmail ou chave secreta no código. O processamento e a entrega são feitos pelo FormSubmit. O site não possui banco de dados próprio. A disponibilidade e as regras do serviço externo continuam valendo.
+
+Para alterar o destinatário, ajuste o endereço na ação do formulário em `index.html` e os textos do contato em `index.html` e `app.js`. Um novo destinatário precisará ser confirmado no serviço.
 
 ## Acesso e indexação
 
@@ -43,11 +59,11 @@ Nenhum domínio, DNS, configuração de hospedagem ou permissão de acesso foi a
 
 ## Visualização no computador
 
-É possível abrir `index.html` no navegador. Para uma visualização por servidor local, execute `python3 -m http.server 8080` na pasta extraída e abra `http://localhost:8080`.
+Para visualizar e testar por servidor local, execute `python3 -m http.server 8080` na pasta extraída e abra `http://localhost:8080`.
 
 ## Notas da exportação
 
 - Arquivos derivados da versão aprovada e hospedada em 17/11/2026.
 - HTML, CSS e JavaScript estão incluídos como arquivos editáveis, sem etapa de build.
-- As únicas adaptações no código exportado são os caminhos relativos dos arquivos locais.
+- Esta versão inclui o formulário por e-mail e mantém os caminhos relativos dos arquivos locais.
 - As configurações internas da hospedagem privada, o histórico Git e credenciais não são necessários para a instalação e não estão no pacote.
