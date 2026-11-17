@@ -58,7 +58,6 @@ form.addEventListener('submit', async event => {
     return;
   }
   if (!form.reportValidity()) return;
-  // The hidden field is processed by FormSubmit as an anti-spam honeypot.
   if (form.elements.namedItem('_honey').value) return;
   if (location.protocol === 'file:') {
     formStatus.textContent = 'Para enviar a mensagem, abra o site pela hospedagem. Você também pode escrever para agenciaadrah@gmail.com.';
@@ -72,35 +71,24 @@ form.addEventListener('submit', async event => {
   form.setAttribute('aria-busy', 'true');
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 25000);
-  const payload = Object.fromEntries(new FormData(form));
-  payload.name = name;
-  payload.email = emailInput.value.trim();
-  payload.message = ideaInput.value.trim() || 'Gostaria de conversar sobre os serviços da ADRAH.';
-  payload._replyto = payload.email;
+  const payload = new FormData(form);
+  payload.set('name', name);
+  payload.set('email', emailInput.value.trim());
+  payload.set('message', ideaInput.value.trim() || 'Gostaria de conversar sobre os serviços da ADRAH.');
   const endpoint = new URL(form.action);
-  endpoint.pathname = '/ajax' + endpoint.pathname;
   try {
     const response = await fetch(endpoint.href, {
       method: 'POST',
-      headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
-      body: JSON.stringify(payload),
+      body: payload,
       signal: controller.signal
     });
-    const result = await response.json();
-    // HTTP 200 or the string "false" must never be treated as a successful send.
-    if (!response.ok || ![true, 'true'].includes(result.success)) {
-      const failure = new Error('Submission was not accepted.');
-      failure.activationRequired = typeof result.message === 'string' && /activat/i.test(result.message);
-      throw failure;
-    }
+    if (!response.ok) throw new Error('Submission was not accepted.');
     form.hidden = true;
     successPanel.hidden = false;
     document.querySelector('#success-title').focus({preventScroll:true});
     successPanel.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
   } catch (error) {
-    formStatus.textContent = error.activationRequired
-      ? 'O formulário ainda está sendo ativado. Por enquanto, escreva diretamente para agenciaadrah@gmail.com. Seus dados continuam preenchidos.'
-      : 'Não conseguimos confirmar o envio. Seus dados continuam preenchidos. Tente novamente ou escreva diretamente para agenciaadrah@gmail.com.';
+    formStatus.textContent = 'Não conseguimos confirmar o envio. Seus dados continuam preenchidos. Tente novamente ou escreva diretamente para agenciaadrah@gmail.com.';
     formStatus.hidden = false;
   } finally {
     clearTimeout(timeout);
