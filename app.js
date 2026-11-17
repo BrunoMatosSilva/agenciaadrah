@@ -18,10 +18,11 @@ window.matchMedia('(min-width: 801px)').addEventListener('change', event => { if
 
 const form = document.querySelector('#contact-form');
 const interest = document.querySelector('#interest');
-const preview = document.querySelector('#message-preview');
 const status = document.querySelector('#selection-status');
 const nameInput = document.querySelector('#name');
 const ideaInput = document.querySelector('#idea');
+const formStatus = document.querySelector('#form-status');
+const submitButton = form.querySelector('button[type="submit"]');
 const serviceDetails = [...document.querySelectorAll('.service')];
 serviceDetails.forEach(details => details.addEventListener('toggle', () => {
   if (details.open) serviceDetails.forEach(other => { if (other !== details) other.open = false; });
@@ -29,13 +30,12 @@ serviceDetails.forEach(details => details.addEventListener('toggle', () => {
 document.querySelectorAll('.service-contact').forEach(button => button.addEventListener('click', () => {
   interest.value = button.dataset.interest;
   form.hidden = false;
-  preview.hidden = true;
   status.textContent = button.dataset.interest + ' selecionado. Conte um pouco da sua ideia.';
   document.querySelector('#contato').scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
   nameInput.focus({preventScroll:true});
 }));
 nameInput.addEventListener('input', () => nameInput.setCustomValidity(''));
-form.addEventListener('submit', event => {
+form.addEventListener('submit', async event => {
   event.preventDefault();
   const name = nameInput.value.trim();
   if (!name) {
@@ -43,19 +43,43 @@ form.addEventListener('submit', event => {
     nameInput.reportValidity();
     return;
   }
-  const selected = interest.value;
-  const idea = ideaInput.value.trim();
-  const message = 'Olá, ADRAH! Me chamo ' + name + '.\n\n' + (selected === 'Ainda quero descobrir' ? 'Gostaria de entender como vocês podem ajudar meu negócio.' : 'Tenho interesse em ' + selected.toLocaleLowerCase('pt-BR') + '.') + (idea ? '\n\nMinha ideia: ' + idea : '') + '\n\nPodemos conversar?';
-  document.querySelector('#message-text').textContent = message;
-  document.querySelector('#whatsapp-message').href = 'https://wa.me/5511961364949?text=' + encodeURIComponent(message);
-  form.hidden = true;
-  preview.hidden = false;
-  document.querySelector('#message-status').textContent = 'Mensagem preparada. Confira o texto antes de abrir o WhatsApp.';
-  document.querySelector('#whatsapp-message').focus({preventScroll:true});
-  preview.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
-});
-document.querySelector('#edit-message').addEventListener('click', () => {
-  preview.hidden = true;
-  form.hidden = false;
-  ideaInput.focus({preventScroll:true});
+  nameInput.value = name;
+  submitButton.disabled = true;
+  formStatus.dataset.state = 'pending';
+  formStatus.textContent = 'Enviando sua mensagem...';
+  try {
+    const response = await fetch('https://formsubmit.co/ajax/agenciaadrah@gmail.com', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+      },
+      body: JSON.stringify({
+        _subject: 'Novo contato pelo site ADRAH',
+        _template: 'table',
+        Nome: name,
+        Interesse: interest.value,
+        Ideia: ideaInput.value.trim()
+      })
+    });
+    let result;
+    try {
+      result = await response.json();
+    } catch {
+      throw new Error('O serviço de formulários respondeu em formato inválido.');
+    }
+    if (!response.ok || result.success !== true && result.success !== 'true') {
+      throw new Error(result.message || 'O serviço de e-mail não aceitou o envio.');
+    }
+    formStatus.dataset.state = 'success';
+    formStatus.textContent = result.message || 'Mensagem enviada. Obrigado pelo contato!';
+    form.reset();
+  } catch (error) {
+    formStatus.dataset.state = 'error';
+    formStatus.textContent = error instanceof Error
+      ? 'Não foi possível enviar a mensagem: ' + error.message
+      : 'Não foi possível enviar a mensagem. Tente novamente mais tarde.';
+  } finally {
+    submitButton.disabled = false;
+  }
 });

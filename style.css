@@ -16,3 +16,4 @@
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important;animation:none!important}}
 
 .arrow{display:block;width:19px;height:19px;flex-shrink:0}.nav-contact .arrow{width:17px;height:17px}.step-number .arrow{width:18px;height:18px}.direct-contact .arrow{width:15px;height:15px}.message-preview{scroll-margin-top:110px}
+.form-feedback{min-height:1.5em;margin-top:8px;text-align:center;font-size:11px;line-height:1.6;color:var(--muted)}.form-feedback[data-state="success"]{color:#38633c}.form-feedback[data-state="error"]{color:var(--wine)}.button:disabled{cursor:wait;opacity:.7;transform:none}
