@@ -19,7 +19,7 @@ Os caminhos dos arquivos foram ajustados para serem relativos. Assim, os mesmos 
 | --- | --- |
 | `index.html` | Textos, estrutura da página, serviços, perguntas frequentes e formulário. |
 | `style.css` | Cores, tipografia, espaçamentos e adaptações para desktop e celular. |
-| `app.js` | Menu móvel, seleção dos serviços e preparação da mensagem de contato. |
+| `app.js` | Menu móvel, seleção dos serviços e validação do formulário de contato. |
 | `assets/adrah-logo.png` | Logo usado na página. |
 | `assets/favicon.svg` | Ícone exibido na aba do navegador. |
 | `assets/manrope-*.ttf` | Fontes locais usadas no site. |
@@ -29,7 +29,7 @@ Os caminhos dos arquivos foram ajustados para serem relativos. Assim, os mesmos 
 
 O WhatsApp configurado é **(11) 96136-4949**.
 
-O formulário prepara uma mensagem no próprio navegador, permite revisar e editar o texto e oferece um link para abrir a conversa no WhatsApp. O visitante confirma o envio no WhatsApp. O site não envia e-mails nem armazena os dados preenchidos.
+O formulário envia nome, interesse e ideia para **agenciaadrah@gmail.com** usando o FormSubmit. No primeiro envio, o destinatário precisa confirmar o endereço no e-mail de ativação enviado pelo FormSubmit; até essa confirmação, os envios não serão encaminhados. O provedor processa os dados do formulário para realizar o envio. O link direto para conversar pelo WhatsApp continua disponível separadamente.
 
 Para trocar o número de contato, atualize as ocorrências de `5511961364949` em `index.html` e `app.js`, além do número formatado exibido no HTML.
 
