@@ -66,13 +66,13 @@ form.addEventListener('submit', async event => {
   // Campo oculto anti-spam (honeypot).
   if (form.elements.namedItem('botcheck').checked) return;
   if (location.protocol === 'file:') {
-    formStatus.textContent = 'Para enviar a mensagem, abra o site pela hospedagem. Você também pode escrever para agenciaadrah@gmail.com.';
+    formStatus.textContent = 'Para enviar a mensagem, abra o site pela hospedagem.';
     formStatus.hidden = false;
     return;
   }
   clearFormStatus();
   if (!/^[0-9a-f-]{20,}$/i.test(document.querySelector('#access-key').value)) {
-    formStatus.textContent = 'O formulário ainda não foi configurado. Por enquanto, escreva diretamente para agenciaadrah@gmail.com.';
+    formStatus.textContent = 'O formulário ainda não está configurado. Tente novamente mais tarde.';
     formStatus.hidden = false;
     return;
   }
@@ -114,7 +114,7 @@ form.addEventListener('submit', async event => {
       form.submit();
       return;
     }
-    formStatus.textContent = 'Não conseguimos confirmar o envio. Seus dados continuam preenchidos. Tente novamente ou escreva diretamente para agenciaadrah@gmail.com.';
+    formStatus.textContent = 'Não conseguimos confirmar o envio. Seus dados continuam preenchidos. Tente novamente.';
     formStatus.hidden = false;
   } finally {
     clearTimeout(timeout);

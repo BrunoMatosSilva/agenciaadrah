@@ -27,11 +27,11 @@ Os caminhos dos arquivos foram ajustados para serem relativos. Assim, os mesmos 
 
 ## Contato e formulário por e-mail
 
-O formulário usa o serviço gratuito **Web3Forms** (https://web3forms.com/) e entrega as mensagens em **agenciaadrah@gmail.com**. O e-mail do cliente vai como Reply-To. O WhatsApp **(11) 96136-4949** continua disponível.
+O formulário usa o serviço gratuito **Web3Forms** (https://web3forms.com/) e entrega as mensagens no e-mail configurado no serviço. O e-mail informado pelo cliente fica como Reply-To.
 
 ### Ativação (2 minutos, uma única vez)
 
-1. Acesse https://web3forms.com/ , informe **agenciaadrah@gmail.com** e clique para criar a chave de acesso.
+1. Acesse https://web3forms.com/, informe o e-mail de recebimento e clique para criar a chave de acesso.
 2. A chave (access key) chega nesse e-mail. Copie.
 3. Em `index.html`, troque `COLE_AQUI_A_CHAVE_DO_WEB3FORMS` pela chave, no campo `access_key`. A chave é pública por desenho; não é senha.
 4. Envie os arquivos à hospedagem e teste o formulário pelo endereço HTTPS, no computador e no celular.
