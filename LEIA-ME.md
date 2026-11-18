@@ -27,7 +27,7 @@ Os caminhos dos arquivos foram ajustados para serem relativos. Assim, os mesmos 
 
 ## Contato e formulário por e-mail
 
-O formulário usa o serviço gratuito **Web3Forms** (https://web3forms.com/) e entrega as mensagens no e-mail configurado no serviço. O e-mail informado pelo cliente fica como Reply-To.
+O formulário usa o serviço gratuito **Web3Forms** (https://web3forms.com/) e entrega as mensagens no e-mail configurado no serviço. O e-mail informado pelo cliente fica como Reply-To. O botão de WhatsApp abre a conversa sem mostrar o número no site.
 
 ### Ativação (2 minutos, uma única vez)
 

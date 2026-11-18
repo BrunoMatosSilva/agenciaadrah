@@ -21,3 +21,9 @@
 
 /* Email contact form */
 .form-trap{display:none}.form-status{margin-top:18px;padding:14px;background:#f4ebe4;border:1px solid #dfc7b8;border-radius:5px;color:#683928;font-size:12px;line-height:1.8;overflow-wrap:anywhere}button:disabled{cursor:wait;opacity:.65;transform:none!important}#submit-label{font-size:12px;font-weight:700;line-height:1.5}.message-success{scroll-margin-top:110px}.success-mark{display:block;width:43px;color:#6a794d;margin-bottom:24px}.success-mark svg{display:block;width:43px;height:43px}.message-success h3{font-size:27px}.message-success>p{font-size:13px;line-height:1.9;margin:20px 0 29px;color:var(--muted)}
+
+.contact h2 .contact-closing em{display:inline}
+.contact-closing{font-size:inherit}
+@media(max-width:600px){.contact-closing{display:block;white-space:nowrap;font-size:inherit}.contact h2 .contact-closing em{display:inline}}
+.direct-contact{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:30px;width:fit-content;min-height:48px;padding:12px 18px;border:1px solid #d9dcd0;border-radius:5px;font-size:12px;font-weight:700;color:var(--ink);transition:background .2s,border-color .2s,color .2s}.direct-contact:hover{background:#f3f1e8;border-color:var(--gold-dark);color:var(--gold-dark)}
+.whatsapp-icon{display:grid;place-items:center;width:24px;height:24px}.whatsapp-icon svg{display:block;width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
