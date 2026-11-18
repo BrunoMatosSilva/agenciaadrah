@@ -27,27 +27,16 @@ Os caminhos dos arquivos foram ajustados para serem relativos. Assim, os mesmos 
 
 ## Contato e formulário por e-mail
 
-O formulário está configurado para encaminhar as mensagens a **agenciaadrah@gmail.com**, por meio do serviço **Forminit** (https://formsinit.com/). O cliente informa nome, e-mail, serviço de interesse e sua ideia. O serviço usa o e-mail informado para permitir responder diretamente ao cliente.
+O formulário usa o serviço gratuito **Web3Forms** (https://web3forms.com/) e entrega as mensagens em **agenciaadrah@gmail.com**. O e-mail do cliente vai como Reply-To. O WhatsApp **(11) 96136-4949** continua disponível.
 
-A opção de falar diretamente pelo WhatsApp **(11) 96136-4949** continua disponível. O botão principal do formulário agora envia a mensagem por e-mail, sem abrir o WhatsApp ou o programa de e-mail do visitante.
+### Ativação (2 minutos, uma única vez)
 
-### Confirmação inicial — faça antes de divulgar o formulário
+1. Acesse https://web3forms.com/ , informe **agenciaadrah@gmail.com** e clique para criar a chave de acesso.
+2. A chave (access key) chega nesse e-mail. Copie.
+3. Em `index.html`, troque `COLE_AQUI_A_CHAVE_DO_WEB3FORMS` pela chave, no campo `access_key`. A chave é pública por desenho; não é senha.
+4. Envie os arquivos à hospedagem e teste o formulário pelo endereço HTTPS, no computador e no celular.
 
-1. Envie os arquivos a uma hospedagem e abra o formulário pelo endereço HTTPS do site.
-2. Preencha o formulário com uma mensagem de teste e envie.
-3. Abra a conta **agenciaadrah@gmail.com** e procure a mensagem de confirmação do **Forminit**, inclusive na pasta de spam.
-4. Siga as instruções da mensagem para confirmar o recebimento.
-5. Faça um novo envio e confirme a chegada da mensagem na caixa da ADRAH, incluindo o e-mail do remetente e o serviço escolhido. Teste também a opção Responder no e-mail recebido.
-
-A confirmação só pode ser concluída por quem tem acesso à caixa de destino. Se já estiver confirmada, basta validar um novo envio. Consulte https://formsinit.com/ e o suporte do serviço se a mensagem não aparecer.
-
-**A ativação e a entrega real ainda não foram confirmadas.** O teste feito neste ambiente não confirmou o envio ao destinatário. O código trata falhas sem mostrar uma mensagem falsa de sucesso e mantém os dados preenchidos para nova tentativa.
-
-O formulário precisa ser aberto por uma hospedagem ou servidor local com acesso à internet; o envio não funciona abrindo o HTML diretamente como arquivo. A validação de funcionamento final deve ser feita no endereço onde ele será utilizado.
-
-Não é necessário inserir senha do Gmail ou chave secreta no código. O processamento e a entrega são feitos pelo Forminit. O site não possui banco de dados próprio. A disponibilidade e as regras do serviço externo continuam valendo.
-
-Para alterar o destinatário, ajuste o endereço na ação do formulário em `index.html` e os textos do contato em `index.html` e `app.js`. Um novo destinatário precisará ser confirmado no serviço.
+Se o envio em segundo plano falhar, o formulário é enviado de forma nativa e o visitante volta ao site em `?enviado=1#contato`, com a confirmação. O envio não funciona abrindo o HTML como arquivo. Não é necessário React ou Next.
 
 ## Acesso e indexação
 
